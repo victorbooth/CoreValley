@@ -70,13 +70,13 @@
       <button data-page="Bank Accounts" data-icon="landmark"><i data-lucide="landmark"></i>Bank Accounts</button>
       <button data-page="Credit Cards" data-icon="credit-card"><i data-lucide="credit-card"></i>Credit Cards</button>
       <button data-page="Loans" data-icon="landmark"><i data-lucide="landmark"></i>Loans</button>
+      <button data-page="Subscriptions" data-icon="refresh-cw"><i data-lucide="refresh-cw"></i>Subscriptions</button>
+      <button data-page="Utilities" data-icon="plug-zap"><i data-lucide="plug-zap"></i>Utilities</button>
       <button data-page="Debt Payoff Simulator" data-icon="route"><i data-lucide="route"></i>Debt Payoff Simulator</button>
       <button data-page="Investments" data-icon="chart-candlestick"><i data-lucide="chart-candlestick"></i>Investments</button>
       <button data-page="ESPP" data-icon="repeat-2"><i data-lucide="repeat-2"></i>ESPP</button>
       <button data-page="Physical Assets" data-icon="house-plus"><i data-lucide="house-plus"></i>Physical Assets</button>
       <button data-page="Goals & Cash Flow" data-icon="goal"><i data-lucide="goal"></i>Goals & Cash Flow</button>
-      <button data-page="Subscriptions" data-icon="refresh-cw"><i data-lucide="refresh-cw"></i>Subscriptions</button>
-      <button data-page="Utilities" data-icon="plug-zap"><i data-lucide="plug-zap"></i>Utilities</button>
       <button data-page="Settings" data-icon="settings"><i data-lucide="settings"></i>Settings</button>
     </nav>
     <div class="side-foot"><strong>Demo data</strong><br>Saved privately in this browser.<br><span id="saveStatus">All changes saved</span></div>
@@ -533,6 +533,30 @@
     dataProvider.save(state);renderRecurringPages();lucide.createIcons();
   }
   installRecurringHouseholdPages();
+  function installSubscriptionPayoffScenarios(){
+    document.head.insertAdjacentHTML('beforeend',`<style>.cancellation-scenario{margin-top:16px}.scenario-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.scenario-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}.scenario-stat{background:#f7f9f8;border:1px solid var(--line);border-radius:12px;padding:12px}.scenario-stat strong{display:block;font:800 20px Manrope;margin-top:3px}.scenario-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.scenario-option{display:flex;align-items:center;gap:11px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer}.scenario-option:has(input:checked){border-color:#8cbda9;background:var(--mint)}.scenario-option input{width:17px;height:17px;accent-color:var(--brand)}.scenario-option span{min-width:0;flex:1}.scenario-option .scenario-cost{font-weight:800;color:var(--brand-2);white-space:nowrap}.scenario-note{font-size:9px;color:var(--muted);margin-top:12px}@media(max-width:760px){.scenario-head{display:block}.scenario-summary,.scenario-list{grid-template-columns:1fr}}</style>`);
+    state.payoffSubscriptionScenarios=state.payoffSubscriptionScenarios||{};
+    const scenarioCard=document.createElement('article');scenarioCard.className='card cancellation-scenario';scenarioCard.id='subscriptionPayoffScenarios';
+    const controlCard=$('#engageBar').closest('article');controlCard.after(scenarioCard);
+    const frequencyMultiplier={weekly:52,biweekly:26,monthly:12,quarterly:4,semiannual:2,annual:1};
+    const monthlyCost=item=>Number(item.amount||0)*(frequencyMultiplier[item.frequency]||12)/12;
+    const activeSubscriptions=()=>state.recurringItems.filter(item=>item.type==='subscription'&&item.active!==false&&item.isArchived!==true);
+    const scenarioBudget=()=>activeSubscriptions().filter(item=>state.payoffSubscriptionScenarios[item.id]===true).reduce((total,item)=>total+monthlyCost(item),0);
+    const originalSimulatePlan=simulatePlan;
+    simulatePlan=function(method=state.payoffMethod,extra=Number(state.payoffExtra)||0,rollover=state.payoffRollover!==false){return originalSimulatePlan(method,Number(extra||0)+scenarioBudget(),rollover)};
+    const originalGetPayoffPlan=getPayoffPlan;
+    getPayoffPlan=function(){const plan=originalGetPayoffPlan(),first=plan.included[0],budget=scenarioBudget();if(first)plan.targets[first.id]=Math.min(first.balance,first.minimum+(Number(state.payoffExtra)||0)+budget);return plan};
+    const renderScenarios=()=>{
+      const subscriptions=activeSubscriptions(),budget=scenarioBudget(),baseline=originalSimulatePlan(state.payoffMethod,Number(state.payoffExtra)||0,state.payoffRollover!==false),scenario=simulatePlan(),monthsSooner=Math.max(0,baseline.months-scenario.months),interestSaved=Math.max(0,baseline.interest-scenario.interest);
+      scenarioCard.innerHTML=`<div class="scenario-head"><div><h2>Subscription cancellation scenarios</h2><div class="card-note">Optionally test how redirecting selected subscription costs to debt changes this payoff projection.</div></div><span class="inventory-badge">Optional · all off by default</span></div><div class="scenario-summary"><div class="scenario-stat"><span class="kpi-label">Added monthly payoff</span><strong>${money(budget)}</strong></div><div class="scenario-stat"><span class="kpi-label">Projected time saved</span><strong>${monthsSooner} month${monthsSooner===1?'':'s'}</strong></div><div class="scenario-stat"><span class="kpi-label">Projected interest saved</span><strong>${money(interestSaved)}</strong></div></div><div class="scenario-list">${subscriptions.map(item=>`<label class="scenario-option"><input type="checkbox" data-subscription-scenario="${item.id}" ${state.payoffSubscriptionScenarios[item.id]===true?'checked':''}><span><strong>${item.name}</strong><span class="sub" style="display:block">${item.provider} · ${item.frequency}</span></span><span class="scenario-cost">+${money(monthlyCost(item))}/mo</span></label>`).join('')||'<div class="sub">No active subscriptions are available for a cancellation scenario.</div>'}</div><div class="scenario-note">Planning scenario only. Selecting an item does not cancel the service or modify its Subscription record. Utilities and charitable donations are excluded.</div>`;
+      $$('[data-subscription-scenario]').forEach(input=>input.onchange=()=>{state.payoffSubscriptionScenarios[input.dataset.subscriptionScenario]=input.checked;dataProvider.save(state);renderPayoffPlan()});
+      lucide.createIcons();
+    };
+    const originalRenderPayoffPlan=renderPayoffPlan;
+    renderPayoffPlan=function(){originalRenderPayoffPlan();const plan=getPayoffPlan();$('#planPayment').textContent=money(plan.included.reduce((sum,debt)=>sum+debt.minimum,0)+(Number(state.payoffExtra)||0)+scenarioBudget());renderScenarios()};
+    renderPayoffPlan();
+  }
+  installSubscriptionPayoffScenarios();
   window.addEventListener('resize',()=>{clearTimeout(window.chartTimer);window.chartTimer=setTimeout(drawCharts,100)});
   setPage(state.activePage); renderAccounts(); lucide.createIcons(); drawCharts();
 </script>
