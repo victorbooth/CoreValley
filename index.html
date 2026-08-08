@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CoreValley household finance dashboard prototype" />
+  <title>CoreValley — Household Finance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      --ink:#18231f; --muted:#6d7973; --line:#e4e9e6; --paper:#fff; --wash:#f4f7f5;
+      --brand:#173d31; --brand-2:#24775d; --mint:#dff3eb; --lime:#cfe874; --gold:#b6812b;
+      --danger:#bd4b4b; --shadow:0 14px 35px rgba(19,48,38,.08); --radius:20px;
+    }
+    *{box-sizing:border-box} body{margin:0;background:var(--wash);color:var(--ink);font-family:"DM Sans",sans-serif}
+    button,input{font:inherit} button{cursor:pointer} a{color:inherit;text-decoration:none}
+    .app{min-height:100vh;display:grid;grid-template-columns:250px 1fr}
+    .sidebar{position:fixed;inset:0 auto 0 0;width:250px;background:var(--brand);color:white;padding:28px 18px;display:flex;flex-direction:column;z-index:20}
+    .brand{display:flex;align-items:center;gap:12px;padding:0 10px 28px;font:800 20px Manrope}
+    .brand-mark{width:34px;height:34px;border-radius:11px;background:var(--lime);color:var(--brand);display:grid;place-items:center;font-size:17px}
+    .nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#bed0c9;padding:12px 13px;border-radius:12px;text-align:left;display:flex;gap:11px;align-items:center;font-weight:600}
+    .nav button:hover,.nav button.active{background:rgba(255,255,255,.11);color:#fff}.nav i{width:18px}
+    .side-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.13);padding:18px 10px 0;color:#b9c9c3;font-size:12px;line-height:1.6}
+    .main{grid-column:2;padding:26px 30px 42px;max-width:1600px;width:100%;margin:auto}
+    .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.eyebrow{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+    h1{font:800 28px Manrope;margin:4px 0 0;letter-spacing:-.04em}.top-actions{display:flex;gap:10px;align-items:center}
+    .icon-btn,.avatar{width:42px;height:42px;border:1px solid var(--line);background:#fff;border-radius:13px;display:grid;place-items:center}.avatar{background:var(--mint);border:0;font-weight:800;color:var(--brand)}
+    .alert{display:flex;align-items:center;gap:12px;background:#fff9e8;border:1px solid #f0dfac;border-radius:16px;padding:14px 16px;margin-bottom:18px;color:#73551e}
+    .alert strong{color:#4d3813}.alert .spacer{flex:1}.link-btn{border:0;background:transparent;font-weight:700;color:var(--brand-2)}
+    .grid{display:grid;gap:16px}.kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 1px 0 rgba(20,40,33,.02);padding:20px}
+    .kpi{min-height:158px;position:relative;overflow:hidden}.kpi-label{color:var(--muted);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:space-between}
+    .kpi-icon{width:34px;height:34px;border-radius:10px;background:var(--mint);color:var(--brand-2);display:grid;place-items:center}.kpi-value{font:800 28px Manrope;margin:18px 0 10px;letter-spacing:-.04em}
+    .sub{font-size:12px;color:var(--muted)}.positive{color:#18845f}.negative{color:var(--danger)}.trend{font-weight:700;margin-right:5px}.segmented{display:flex;gap:3px;background:#f0f3f1;padding:3px;border-radius:9px}
+    .segmented button{border:0;background:transparent;border-radius:7px;padding:4px 7px;font-size:10px;color:var(--muted)}.segmented button.active{background:white;color:var(--ink);box-shadow:0 1px 4px #ccd4cf}
+    .charts{grid-template-columns:1.45fr 1fr;margin-bottom:16px}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:17px}
+    h2{font:700 16px Manrope;margin:0}.card-note{color:var(--muted);font-size:12px;margin-top:5px}.legend{display:flex;gap:13px;color:var(--muted);font-size:11px}.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px}
+    canvas{display:block;width:100%;height:245px}.actions{grid-template-columns:1.1fr 1fr .9fr;margin-bottom:16px}.list{display:grid;gap:11px}.payment{display:grid;grid-template-columns:38px 1fr auto;align-items:center;gap:11px;padding:11px;background:#f8faf9;border-radius:13px}
+    .payment-icon{width:38px;height:38px;border-radius:11px;background:#fff;border:1px solid var(--line);display:grid;place-items:center}.payment-name{font-weight:700;font-size:13px}.payment-meta{font-size:11px;color:var(--muted);margin-top:2px}.amount{text-align:right;font-weight:700;font-size:13px}.mini-btn{display:block;border:0;background:transparent;color:var(--brand-2);font-size:11px;font-weight:700;margin:3px 0 0 auto;padding:0}
+    .goal{margin-bottom:17px}.goal-line{display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px}.goal-line strong{font-size:13px}.bar{height:8px;background:#edf1ef;border-radius:20px;overflow:hidden}.bar span{display:block;height:100%;border-radius:20px;background:var(--brand-2)}
+    .status-pill{display:inline-flex;align-items:center;gap:5px;background:var(--mint);color:var(--brand-2);border-radius:20px;padding:5px 8px;font-size:10px;font-weight:700}
+    .espp-hero{border-radius:15px;padding:15px;background:var(--brand);color:white;margin-bottom:12px}.espp-hero .label{color:#bed0c9;font-size:11px}.espp-hero .big{font:800 25px Manrope;margin:5px 0}.stat-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tiny-stat{border:1px solid var(--line);border-radius:12px;padding:11px}.tiny-stat span{display:block;color:var(--muted);font-size:10px;margin-bottom:4px}.tiny-stat strong{font-size:13px}
+    .cash{display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:center}.cash-total{padding-right:24px;border-right:1px solid var(--line)}.cash-total .big{font:800 30px Manrope;margin:7px 0}.cash-bars{display:grid;gap:11px}.cash-row{display:grid;grid-template-columns:140px 1fr 85px;align-items:center;gap:12px;font-size:12px}.cash-row strong{text-align:right}.cash-row .bar span{background:var(--lime)}
+    .page-placeholder{display:none;min-height:580px;place-items:center;text-align:center}.page-placeholder.active{display:grid}.dashboard.hidden{display:none}.placeholder-icon{width:64px;height:64px;background:var(--mint);color:var(--brand-2);border-radius:20px;display:grid;place-items:center;margin:auto auto 16px}
+    .toast{position:fixed;right:24px;bottom:24px;background:var(--brand);color:#fff;padding:13px 17px;border-radius:12px;box-shadow:var(--shadow);font-size:13px;transform:translateY(90px);opacity:0;transition:.25s;z-index:50}.toast.show{transform:none;opacity:1}
+    .menu-btn{display:none}.mobile-nav{display:none}
+    @media(max-width:1150px){.kpis{grid-template-columns:1fr 1fr}.charts,.actions{grid-template-columns:1fr}.cash{grid-template-columns:1fr}.cash-total{border:0;border-bottom:1px solid var(--line);padding:0 0 18px}}
+    @media(max-width:760px){.app{display:block}.sidebar{transform:translateX(-100%);transition:.25s;box-shadow:var(--shadow)}.sidebar.open{transform:none}.main{padding:18px 15px}.menu-btn{display:grid}.kpis{grid-template-columns:1fr}.topbar{align-items:flex-start}.alert{align-items:flex-start}.alert .link-btn{display:none}.cash-row{grid-template-columns:100px 1fr 65px}.kpi{min-height:140px}.charts canvas{height:210px}.legend{display:none}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="brand-mark">CV</div>CoreValley</div>
+    <nav class="nav" id="nav">
+      <button class="active" data-page="Dashboard" data-icon="layout-dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</button>
+      <button data-page="Accounts & Cards" data-icon="credit-card"><i data-lucide="credit-card"></i>Accounts & Cards</button>
+      <button data-page="Loans & Debt" data-icon="landmark"><i data-lucide="landmark"></i>Loans & Debt</button>
+      <button data-page="Investments" data-icon="chart-candlestick"><i data-lucide="chart-candlestick"></i>Investments</button>
+      <button data-page="ESPP" data-icon="repeat-2"><i data-lucide="repeat-2"></i>ESPP</button>
+      <button data-page="Other Assets" data-icon="gem"><i data-lucide="gem"></i>Other Assets</button>
+      <button data-page="Goals & Cash Flow" data-icon="goal"><i data-lucide="goal"></i>Goals & Cash Flow</button>
+      <button data-page="Settings" data-icon="settings"><i data-lucide="settings"></i>Settings</button>
+    </nav>
+    <div class="side-foot"><strong>Demo data</strong><br>Saved privately in this browser.<br><span id="saveStatus">All changes saved</span></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><div class="eyebrow" id="todayLabel"></div><h1 id="pageTitle">Household overview</h1></div>
+      <div class="top-actions"><button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu"><i data-lucide="menu"></i></button><button class="icon-btn" aria-label="Notifications"><i data-lucide="bell"></i></button><div class="avatar" title="Victor & household">VB</div></div>
+    </header>
+
+    <section class="dashboard" id="dashboard">
+      <div class="alert"><i data-lucide="calendar-clock"></i><div><strong>2 payments due in the next 7 days</strong><div class="sub">Chase Sapphire on Aug 10 · Auto loan on Aug 13</div></div><div class="spacer"></div><button class="link-btn" data-action="payments">Review payments →</button></div>
+
+      <div class="grid kpis">
+        <article class="card kpi"><div class="kpi-label"><span>Net worth</span><div class="segmented" id="trendToggle"><button class="active" data-trend="mom">MoM</button><button data-trend="qoq">QoQ</button><button data-trend="yoy">YoY</button></div></div><div class="kpi-value">$684,250</div><div class="sub"><span class="positive trend" id="trendValue">↗ 2.4%</span><span id="trendCopy">vs last month</span></div></article>
+        <article class="card kpi"><div class="kpi-label"><span>Total cash & liquidity</span><span class="kpi-icon"><i data-lucide="wallet-cards"></i></span></div><div class="kpi-value">$92,480</div><div class="sub"><span class="positive trend">+$6,230</span> over 90 days</div></article>
+        <article class="card kpi"><div class="kpi-label"><span>Total debt</span><span class="kpi-icon"><i data-lucide="badge-dollar-sign"></i></span></div><div class="kpi-value">$318,740</div><div class="sub"><span class="positive trend">↓ $3,480</span> debt-free May 2044</div></article>
+        <article class="card kpi"><div class="kpi-label"><span>Predicted annual income</span><span class="kpi-icon"><i data-lucide="sparkles"></i></span></div><div class="kpi-value">$23,816</div><div class="sub"><span class="positive trend">$11.45/hr</span> passive hourly wage</div></article>
+      </div>
+
+      <div class="grid charts">
+        <article class="card"><div class="card-head"><div><h2>Net worth trajectory</h2><div class="card-note">Actual history with a 12-month projection</div></div><div class="legend"><span><i class="dot" style="background:#24775d"></i>Actual</span><span><i class="dot" style="background:#b9d4ca"></i>Projected</span></div></div><canvas id="netWorthChart" aria-label="Net worth trend chart"></canvas></article>
+        <article class="card"><div class="card-head"><div><h2>Debt payoff projection</h2><div class="card-note">Current plan · $1,250 extra monthly</div></div><span class="status-pill"><i data-lucide="circle-check" style="width:13px"></i>On plan</span></div><canvas id="debtChart" aria-label="Debt payoff projection chart"></canvas></article>
+      </div>
+
+      <div class="grid actions">
+        <article class="card"><div class="card-head"><div><h2>Upcoming payments</h2><div class="card-note">Next 14 days</div></div><button class="link-btn" data-action="payments">View all</button></div><div class="list">
+          <div class="payment"><div class="payment-icon"><i data-lucide="credit-card"></i></div><div><div class="payment-name">Chase Sapphire</div><div class="payment-meta">Due Aug 10 · Autopay off</div></div><div class="amount">$842.16<button class="mini-btn log-payment" data-name="Chase Sapphire">Log payment</button></div></div>
+          <div class="payment"><div class="payment-icon"><i data-lucide="car-front"></i></div><div><div class="payment-name">Capital One Auto</div><div class="payment-meta">Due Aug 13 · Autopay on</div></div><div class="amount">$618.00<button class="mini-btn log-payment" data-name="Auto loan">Log payment</button></div></div>
+          <div class="payment"><div class="payment-icon"><i data-lucide="house"></i></div><div><div class="payment-name">Primary mortgage</div><div class="payment-meta">Due Sep 1 · Autopay on</div></div><div class="amount">$2,846.00<button class="mini-btn log-payment" data-name="Mortgage">Log payment</button></div></div>
+        </div></article>
+
+        <article class="card"><div class="card-head"><div><h2>Savings goals</h2><div class="card-note">$2,375 contributed this month</div></div><button class="link-btn" data-action="Goals & Cash Flow">Manage</button></div>
+          <div class="goal"><div class="goal-line"><strong>Emergency reserve</strong><span>$31,500 / $40,000</span></div><div class="bar"><span style="width:79%"></span></div><div class="sub" style="margin-top:6px">79% · Ahead by 2 months</div></div>
+          <div class="goal"><div class="goal-line"><strong>2027 family travel</strong><span>$7,240 / $15,000</span></div><div class="bar"><span style="width:48%;background:#87bca9"></span></div><div class="sub" style="margin-top:6px">48% · On track</div></div>
+          <div class="goal"><div class="goal-line"><strong>Kitchen renovation</strong><span>$12,900 / $35,000</span></div><div class="bar"><span style="width:37%;background:#d2a557"></span></div><div class="sub" style="margin-top:6px">37% · $410 behind plan</div></div>
+        </article>
+
+        <article class="card"><div class="card-head"><div><h2>ESPP & LOC</h2><div class="card-note">Current strategy cycle</div></div><button class="link-btn" data-action="ESPP">Details</button></div><div class="espp-hero"><div class="label">Estimated cycle gain</div><div class="big">+$3,486</div><div class="sub" style="color:#c9d8d3">Projected ROI 18.6%</div></div><div class="stat-pair"><div class="tiny-stat"><span>ESPP funded</span><strong>$18,750</strong></div><div class="tiny-stat"><span>LOC balance</span><strong>$12,400</strong></div><div class="tiny-stat"><span>Purchase date</span><strong>09/30/2026</strong></div><div class="tiny-stat"><span>Available LOC</span><strong>$37,600</strong></div></div></article>
+      </div>
+
+      <article class="card cash"><div class="cash-total"><div class="eyebrow">August cash flow</div><div class="big">$4,386</div><div class="sub">Unassigned remaining after known payments and allocations</div></div><div class="cash-bars">
+        <div class="cash-row"><span>Household income</span><div class="bar"><span style="width:100%;background:#24775d"></span></div><strong>$18,920</strong></div>
+        <div class="cash-row"><span>Known payments</span><div class="bar"><span style="width:48%;background:#d2a557"></span></div><strong>$9,102</strong></div>
+        <div class="cash-row"><span>Goal allocations</span><div class="bar"><span style="width:28%;background:#87bca9"></span></div><strong>$5,432</strong></div>
+        <div class="cash-row"><span>Unassigned</span><div class="bar"><span style="width:23%"></span></div><strong>$4,386</strong></div>
+      </div></article>
+    </section>
+
+    <section class="page-placeholder card" id="placeholder"><div><div class="placeholder-icon"><i id="placeholderIcon" data-lucide="layers-3"></i></div><h2 id="placeholderTitle">Module coming next</h2><p class="sub" style="max-width:380px;line-height:1.6">The navigation is wired. We’ll build and approve this module in a focused batch after the Dashboard foundation is accepted.</p><button class="link-btn" data-action="Dashboard" style="margin-top:10px">← Return to dashboard</button></div></section>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+  const STORAGE_KEY = 'corevalley-prototype-v1';
+  const defaultState = { activePage:'Dashboard', payments:[], lastOpened:new Date().toISOString() };
+  const dataProvider = {
+    load(){ try { return {...defaultState,...JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}; } catch { return {...defaultState}; } },
+    save(next){ localStorage.setItem(STORAGE_KEY,JSON.stringify(next)); document.getElementById('saveStatus').textContent='Saved just now'; }
+  };
+  let state=dataProvider.load();
+  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+
+  function showToast(message){ const el=$('#toast'); el.textContent=message; el.classList.add('show'); clearTimeout(showToast.timer); showToast.timer=setTimeout(()=>el.classList.remove('show'),2400); }
+  function setPage(page){
+    state.activePage=page; dataProvider.save(state);
+    $$('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+    const dashboard=$('#dashboard'), placeholder=$('#placeholder');
+    if(page==='Dashboard'){ dashboard.classList.remove('hidden'); placeholder.classList.remove('active'); $('#pageTitle').textContent='Household overview'; requestAnimationFrame(drawCharts); }
+    else { dashboard.classList.add('hidden'); placeholder.classList.add('active'); $('#pageTitle').textContent=page; $('#placeholderTitle').textContent=page+' is queued'; }
+    $('#sidebar').classList.remove('open');
+  }
+  function fitCanvas(canvas){ const dpr=window.devicePixelRatio||1, rect=canvas.getBoundingClientRect(); canvas.width=rect.width*dpr; canvas.height=rect.height*dpr; const ctx=canvas.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); return {ctx,w:rect.width,h:rect.height}; }
+  function lineChart(canvas,values,split,color){
+    const {ctx,w,h}=fitCanvas(canvas), pad={l:12,r:12,t:15,b:28}, min=Math.min(...values)*.96,max=Math.max(...values)*1.03;
+    ctx.clearRect(0,0,w,h); ctx.strokeStyle='#edf1ef'; ctx.lineWidth=1;
+    for(let i=0;i<4;i++){let y=pad.t+(h-pad.t-pad.b)*i/3;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke()}
+    const point=(v,i)=>[pad.l+(w-pad.l-pad.r)*i/(values.length-1),pad.t+(max-v)/(max-min)*(h-pad.t-pad.b)];
+    const grad=ctx.createLinearGradient(0,pad.t,0,h-pad.b);grad.addColorStop(0,'rgba(36,119,93,.18)');grad.addColorStop(1,'rgba(36,119,93,0)');
+    ctx.beginPath();values.forEach((v,i)=>{const [x,y]=point(v,i);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.lineTo(w-pad.r,h-pad.b);ctx.lineTo(pad.l,h-pad.b);ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+    ctx.lineWidth=2.5;ctx.strokeStyle=color;ctx.beginPath();values.slice(0,split+1).forEach((v,i)=>{const [x,y]=point(v,i);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();
+    ctx.setLineDash([6,5]);ctx.strokeStyle='#9bbfb2';ctx.beginPath();values.slice(split).forEach((v,j)=>{const i=j+split,[x,y]=point(v,i);j?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#7a8680';ctx.font='11px DM Sans';['Aug 25','Feb 26','Aug 26','Feb 27','Aug 27'].forEach((t,i)=>ctx.fillText(t,pad.l+(w-pad.l-pad.r-34)*i/4,h-7));
+  }
+  function debtChart(canvas,values){
+    const {ctx,w,h}=fitCanvas(canvas), pad={l:12,r:12,t:15,b:28},max=values[0];ctx.clearRect(0,0,w,h);ctx.strokeStyle='#edf1ef';
+    for(let i=0;i<4;i++){let y=pad.t+(h-pad.t-pad.b)*i/3;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke()}
+    const points=values.map((v,i)=>[pad.l+(w-pad.l-pad.r)*i/(values.length-1),pad.t+(1-v/max)*(h-pad.t-pad.b)]);
+    const grad=ctx.createLinearGradient(0,pad.t,0,h-pad.b);grad.addColorStop(0,'rgba(207,232,116,.58)');grad.addColorStop(1,'rgba(207,232,116,.04)');ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.lineTo(w-pad.r,h-pad.b);ctx.lineTo(pad.l,h-pad.b);ctx.closePath();ctx.fillStyle=grad;ctx.fill();ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.strokeStyle='#69852d';ctx.lineWidth=2.5;ctx.stroke();
+    ctx.fillStyle='#7a8680';ctx.font='11px DM Sans';['2026','2032','2038','2044'].forEach((t,i)=>ctx.fillText(t,pad.l+(w-pad.l-pad.r-25)*i/3,h-7));
+  }
+  function drawCharts(){ if(state.activePage!=='Dashboard')return; lineChart($('#netWorthChart'),[528,541,558,572,590,608,625,646,666,684,701,719,738,759,781,804,828],9,'#24775d'); debtChart($('#debtChart'),[319,296,270,241,208,171,131,88,42,0]); }
+
+  $('#todayLabel').textContent=new Intl.DateTimeFormat('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(new Date());
+  $$('.nav button').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page)));
+  $$('[data-action]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.action;if(a==='payments')showToast('Payments panel will open in the Accounts batch.');else setPage(a)}));
+  $$('.log-payment').forEach(b=>b.addEventListener('click',()=>{state.payments.push({name:b.dataset.name,date:new Date().toISOString()});dataProvider.save(state);b.textContent='Logged';b.disabled=true;showToast(b.dataset.name+' payment logged in demo storage.')}));
+  $$('#trendToggle button').forEach(b=>b.addEventListener('click',()=>{const copy={mom:['↗ 2.4%','vs last month'],qoq:['↗ 7.1%','vs last quarter'],yoy:['↗ 18.5%','vs last year']}[b.dataset.trend];$$('#trendToggle button').forEach(x=>x.classList.toggle('active',x===b));$('#trendValue').textContent=copy[0];$('#trendCopy').textContent=copy[1]}));
+  $('#menuBtn').addEventListener('click',()=>$('#sidebar').classList.toggle('open'));
+  window.addEventListener('resize',()=>{clearTimeout(window.chartTimer);window.chartTimer=setTimeout(drawCharts,100)});
+  setPage(state.activePage); lucide.createIcons(); drawCharts();
+</script>
+</body>
+</html>
