@@ -47,8 +47,14 @@
     .page-placeholder{display:none;min-height:580px;place-items:center;text-align:center}.page-placeholder.active{display:grid}.dashboard.hidden{display:none}.placeholder-icon{width:64px;height:64px;background:var(--mint);color:var(--brand-2);border-radius:20px;display:grid;place-items:center;margin:auto auto 16px}
     .toast{position:fixed;right:24px;bottom:24px;background:var(--brand);color:#fff;padding:13px 17px;border-radius:12px;box-shadow:var(--shadow);font-size:13px;transform:translateY(90px);opacity:0;transition:.25s;z-index:50}.toast.show{transform:none;opacity:1}
     .menu-btn{display:none}.mobile-nav{display:none}
-    @media(max-width:1150px){.kpis{grid-template-columns:1fr 1fr}.charts,.actions{grid-template-columns:1fr}.cash{grid-template-columns:1fr}.cash-total{border:0;border-bottom:1px solid var(--line);padding:0 0 18px}}
-    @media(max-width:760px){.app{display:block}.sidebar{transform:translateX(-100%);transition:.25s;box-shadow:var(--shadow)}.sidebar.open{transform:none}.main{padding:18px 15px}.menu-btn{display:grid}.kpis{grid-template-columns:1fr}.topbar{align-items:flex-start}.alert{align-items:flex-start}.alert .link-btn{display:none}.cash-row{grid-template-columns:100px 1fr 65px}.kpi{min-height:140px}.charts canvas{height:210px}.legend{display:none}}
+    .accounts-page{display:none}.accounts-page.active{display:block}.module-intro{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}.module-copy{max-width:650px;color:var(--muted);font-size:13px;line-height:1.6}
+    .primary-btn{border:0;background:var(--brand);color:#fff;border-radius:12px;padding:11px 15px;display:inline-flex;align-items:center;gap:8px;font-weight:700;box-shadow:0 7px 16px rgba(23,61,49,.16)}.primary-btn:hover{background:#205442}.secondary-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:11px;padding:9px 12px;font-weight:700}.danger-btn{border:0;background:#fff0f0;color:var(--danger);border-radius:10px;padding:9px 11px;font-weight:700}
+    .account-kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px}.account-kpis .card{padding:17px}.account-kpis strong{display:block;font:800 23px Manrope;margin-top:9px}.account-layout{grid-template-columns:1.45fr .75fr;align-items:start}.section-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}.filter-tabs{display:flex;gap:5px;flex-wrap:wrap}.filter-tabs button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 10px;color:var(--muted);font-size:11px;font-weight:700}.filter-tabs button.active{background:var(--mint);border-color:#c8e6da;color:var(--brand-2)}
+    .account-list{display:grid;gap:12px}.account-card{border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;grid-template-columns:46px 1fr auto;gap:13px;align-items:start}.account-card:hover{border-color:#cdd8d2}.account-logo{width:46px;height:46px;border-radius:14px;background:var(--mint);color:var(--brand);display:grid;place-items:center;font-weight:800}.account-logo.credit{background:#f2e9d7;color:#805b1e}.account-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.account-title strong{font-size:14px}.owner-pill{background:#f0f3f1;color:var(--muted);padding:3px 7px;border-radius:12px;font-size:9px;font-weight:700}.account-details{color:var(--muted);font-size:11px;margin-top:5px}.account-balance{text-align:right}.account-balance strong{display:block;font:800 17px Manrope}.account-actions{display:flex;gap:7px;justify-content:flex-end;margin-top:9px}.account-actions button{border:0;background:#f4f7f5;border-radius:8px;padding:6px 8px;color:var(--brand-2);font-size:10px;font-weight:700}.util-wrap{margin-top:10px;max-width:360px}.util-line{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-bottom:5px}.util-wrap .bar{height:6px}.util-safe{background:#24775d!important}.util-warn{background:#d2a557!important}
+    .activity-list{display:grid;gap:12px}.activity-item{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center}.activity-icon{width:34px;height:34px;border-radius:10px;background:#f3f6f4;display:grid;place-items:center;color:var(--brand-2)}.activity-item strong{font-size:12px}.activity-item .sub{margin-top:2px}.activity-amount{font-size:12px;font-weight:700}.insight{background:linear-gradient(135deg,var(--brand),#245d49);color:#fff;margin-top:16px}.insight .card-note{color:#bfd3cb}.insight strong{font:800 23px Manrope;display:block;margin:12px 0 5px}
+    .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(13,31,25,.48);z-index:60;padding:20px;place-items:center}.modal-backdrop.open{display:grid}.modal{background:#fff;width:min(680px,100%);max-height:92vh;overflow:auto;border-radius:22px;box-shadow:0 30px 70px rgba(10,30,22,.24);padding:23px}.modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}.close-btn{border:0;background:#f2f5f3;border-radius:10px;width:36px;height:36px;display:grid;place-items:center}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;color:var(--muted);font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:10px 11px;background:#fff;color:var(--ink);font:inherit}.field textarea{min-height:72px;resize:vertical}.check-field{display:flex;align-items:center;gap:8px;padding-top:23px;font-size:12px}.modal-foot{display:flex;justify-content:space-between;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}.modal-actions{display:flex;gap:9px;margin-left:auto}
+    @media(max-width:1150px){.kpis,.account-kpis{grid-template-columns:1fr 1fr}.charts,.actions,.account-layout{grid-template-columns:1fr}.cash{grid-template-columns:1fr}.cash-total{border:0;border-bottom:1px solid var(--line);padding:0 0 18px}}
+    @media(max-width:760px){.app{display:block}.sidebar{transform:translateX(-100%);transition:.25s;box-shadow:var(--shadow)}.sidebar.open{transform:none}.main{padding:18px 15px}.menu-btn{display:grid}.kpis,.account-kpis{grid-template-columns:1fr}.topbar{align-items:flex-start}.alert{align-items:flex-start}.alert .link-btn{display:none}.cash-row{grid-template-columns:100px 1fr 65px}.kpi{min-height:140px}.charts canvas{height:210px}.legend{display:none}.module-intro{align-items:flex-start;flex-direction:column}.module-intro .primary-btn{width:100%;justify-content:center}.account-card{grid-template-columns:40px 1fr}.account-logo{width:40px;height:40px}.account-balance{grid-column:2;text-align:left}.account-actions{justify-content:flex-start}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.modal{padding:18px}}
   </style>
 </head>
 <body>
@@ -79,7 +85,7 @@
 
       <div class="grid kpis">
         <article class="card kpi"><div class="kpi-label"><span>Net worth</span><div class="segmented" id="trendToggle"><button class="active" data-trend="mom">MoM</button><button data-trend="qoq">QoQ</button><button data-trend="yoy">YoY</button></div></div><div class="kpi-value">$684,250</div><div class="sub"><span class="positive trend" id="trendValue">↗ 2.4%</span><span id="trendCopy">vs last month</span></div></article>
-        <article class="card kpi"><div class="kpi-label"><span>Total cash & liquidity</span><span class="kpi-icon"><i data-lucide="wallet-cards"></i></span></div><div class="kpi-value">$92,480</div><div class="sub"><span class="positive trend">+$6,230</span> over 90 days</div></article>
+        <article class="card kpi"><div class="kpi-label"><span>Total cash & liquidity</span><span class="kpi-icon"><i data-lucide="wallet-cards"></i></span></div><div class="kpi-value" id="dashboardCashTotal">$92,480</div><div class="sub"><span class="positive trend">Browser data</span> across cash accounts</div></article>
         <article class="card kpi"><div class="kpi-label"><span>Total debt</span><span class="kpi-icon"><i data-lucide="badge-dollar-sign"></i></span></div><div class="kpi-value">$318,740</div><div class="sub"><span class="positive trend">↓ $3,480</span> debt-free May 2044</div></article>
         <article class="card kpi"><div class="kpi-label"><span>Predicted annual income</span><span class="kpi-icon"><i data-lucide="sparkles"></i></span></div><div class="kpi-value">$23,816</div><div class="sub"><span class="positive trend">$11.45/hr</span> passive hourly wage</div></article>
       </div>
@@ -113,28 +119,105 @@
       </div></article>
     </section>
 
+    <section class="accounts-page" id="accountsPage">
+      <div class="module-intro"><div><h2 style="font-size:20px">Accounts & cards</h2><div class="module-copy">One view of household cash, savings, and revolving credit. Balances update the dashboard automatically and remain stored only in this browser.</div></div><button class="primary-btn" id="newAccountBtn"><i data-lucide="plus" style="width:16px"></i>New account</button></div>
+      <div class="grid account-kpis">
+        <article class="card"><div class="kpi-label">Cash & savings <span class="kpi-icon"><i data-lucide="landmark"></i></span></div><strong id="cashTotal">$0</strong><div class="sub" id="cashAccountCount">0 accounts</div></article>
+        <article class="card"><div class="kpi-label">Card balances <span class="kpi-icon"><i data-lucide="credit-card"></i></span></div><strong id="cardBalanceTotal">$0</strong><div class="sub">Included in household debt</div></article>
+        <article class="card"><div class="kpi-label">Available credit <span class="kpi-icon"><i data-lucide="circle-dollar-sign"></i></span></div><strong id="availableCredit">$0</strong><div class="sub" id="overallUtilization">0% overall utilization</div></article>
+        <article class="card"><div class="kpi-label">Monthly minimums <span class="kpi-icon"><i data-lucide="calendar-check"></i></span></div><strong id="monthlyMinimums">$0</strong><div class="sub" id="nextDueLabel">No payments due</div></article>
+      </div>
+      <div class="grid account-layout">
+        <article class="card">
+          <div class="section-toolbar"><div><h2>Household accounts</h2><div class="card-note" id="accountAsOf">Demo balances</div></div><div class="filter-tabs" id="accountFilters"><button class="active" data-filter="all">All</button><button data-filter="cash">Cash</button><button data-filter="creditCard">Cards</button></div></div>
+          <div class="account-list" id="accountList"></div>
+        </article>
+        <div>
+          <article class="card"><div class="card-head"><div><h2>Recent activity</h2><div class="card-note">Payments logged in this browser</div></div></div><div class="activity-list" id="activityList"></div></article>
+          <article class="card insight"><div class="card-head"><div><h2>Credit health</h2><div class="card-note">Across active cards</div></div><i data-lucide="shield-check"></i></div><strong id="creditHealthValue">Excellent</strong><div class="card-note" id="creditHealthCopy">Utilization is under the recommended 30% threshold.</div></article>
+        </div>
+      </div>
+    </section>
+
     <section class="page-placeholder card" id="placeholder"><div><div class="placeholder-icon"><i id="placeholderIcon" data-lucide="layers-3"></i></div><h2 id="placeholderTitle">Module coming next</h2><p class="sub" style="max-width:380px;line-height:1.6">The navigation is wired. We’ll build and approve this module in a focused batch after the Dashboard foundation is accepted.</p><button class="link-btn" data-action="Dashboard" style="margin-top:10px">← Return to dashboard</button></div></section>
   </main>
 </div>
 <div class="toast" id="toast" role="status"></div>
+<div class="modal-backdrop" id="accountModal" role="dialog" aria-modal="true" aria-labelledby="accountModalTitle">
+  <form class="modal" id="accountForm">
+    <div class="modal-head"><div><h2 id="accountModalTitle">New account</h2><div class="card-note">Add cash, savings, or a credit card.</div></div><button class="close-btn" type="button" data-close-modal aria-label="Close"><i data-lucide="x"></i></button></div>
+    <input type="hidden" id="accountId">
+    <div class="form-grid">
+      <div class="field"><label for="accountType">Account type</label><select id="accountType" required><option value="checking">Checking</option><option value="savings">Savings / HYSA</option><option value="creditCard">Credit card</option></select></div>
+      <div class="field"><label for="accountOwner">Owner</label><select id="accountOwner" required><option>Victor</option><option>Jordan</option><option>Joint</option></select></div>
+      <div class="field"><label for="institutionName">Institution</label><input id="institutionName" required placeholder="e.g. Capital One"></div>
+      <div class="field"><label for="accountNickname">Nickname</label><input id="accountNickname" required placeholder="e.g. Household Checking"></div>
+      <div class="field"><label for="accountLast4">Last four digits</label><input id="accountLast4" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" required placeholder="1234"></div>
+      <div class="field"><label for="accountBalance">Current balance</label><input id="accountBalance" type="number" step="0.01" min="0" required></div>
+      <div class="field card-only"><label for="creditLimit">Credit limit</label><input id="creditLimit" type="number" step="0.01" min="0"></div>
+      <div class="field card-only"><label for="accountApr">APR %</label><input id="accountApr" type="number" step="0.01" min="0"></div>
+      <div class="field card-only"><label for="minimumPayment">Minimum payment</label><input id="minimumPayment" type="number" step="0.01" min="0"></div>
+      <div class="field"><label for="accountDueDay">Due day</label><input id="accountDueDay" type="number" min="1" max="31"></div>
+      <label class="check-field"><input id="accountAutopay" type="checkbox"> Autopay enabled</label>
+      <div class="field full"><label for="accountNotes">Notes</label><textarea id="accountNotes" placeholder="Optional account notes"></textarea></div>
+    </div>
+    <div class="modal-foot"><button class="danger-btn" id="deleteAccountBtn" type="button" style="display:none">Delete</button><div class="modal-actions"><button class="secondary-btn" type="button" data-close-modal>Cancel</button><button class="primary-btn" type="submit">Save account</button></div></div>
+  </form>
+</div>
 
 <script>
   const STORAGE_KEY = 'corevalley-prototype-v1';
-  const defaultState = { activePage:'Dashboard', payments:[], lastOpened:new Date().toISOString() };
+  const sampleAccounts = [
+    {id:'acct-checking',type:'checking',owner:'Joint',institution:'Capital One',nickname:'Household Checking',last4:'4821',balance:14320,autopay:true,dueDay:null,notes:'Primary bill-pay account'},
+    {id:'acct-hysa',type:'savings',owner:'Victor',institution:'Marcus',nickname:'Emergency HYSA',last4:'7304',balance:52160,apy:4.25,autopay:false,dueDay:null,notes:'Emergency reserve and near-term goals'},
+    {id:'acct-savings',type:'savings',owner:'Jordan',institution:'Ally',nickname:'Goals Savings',last4:'1198',balance:25950,apy:4.10,autopay:false,dueDay:null,notes:'Travel and renovation sinking funds'},
+    {id:'card-chase',type:'creditCard',owner:'Victor',institution:'Chase',nickname:'Sapphire Preferred',last4:'9267',balance:842.16,creditLimit:18000,apr:21.49,minimumPayment:45,dueDay:10,autopay:false,notes:'Travel rewards · $95 annual fee'},
+    {id:'card-amex',type:'creditCard',owner:'Jordan',institution:'American Express',nickname:'Blue Cash Preferred',last4:'4402',balance:2174.38,creditLimit:24000,apr:19.99,minimumPayment:74,dueDay:18,autopay:true,notes:'6% grocery rewards'},
+    {id:'card-costco',type:'creditCard',owner:'Joint',institution:'Citi',nickname:'Costco Anywhere',last4:'6015',balance:468.72,creditLimit:12000,apr:20.49,minimumPayment:35,dueDay:24,autopay:true,notes:'Gas and Costco purchases'}
+  ];
+  const defaultState = { activePage:'Dashboard', payments:[], accounts:sampleAccounts, accountFilter:'all', lastOpened:new Date().toISOString() };
   const dataProvider = {
-    load(){ try { return {...defaultState,...JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}; } catch { return {...defaultState}; } },
+    load(){ try { const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); return {...defaultState,...saved,accounts:Array.isArray(saved.accounts)?saved.accounts:sampleAccounts}; } catch { return {...defaultState,accounts:sampleAccounts}; } },
     save(next){ localStorage.setItem(STORAGE_KEY,JSON.stringify(next)); document.getElementById('saveStatus').textContent='Saved just now'; }
   };
   let state=dataProvider.load();
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 
   function showToast(message){ const el=$('#toast'); el.textContent=message; el.classList.add('show'); clearTimeout(showToast.timer); showToast.timer=setTimeout(()=>el.classList.remove('show'),2400); }
+  const money=value=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:value%1?2:0}).format(Number(value)||0);
+  const typeLabel={checking:'Checking',savings:'Savings / HYSA',creditCard:'Credit card'};
+  function renderAccounts(){
+    const accounts=state.accounts||[], cash=accounts.filter(a=>a.type!=='creditCard'), cards=accounts.filter(a=>a.type==='creditCard');
+    const cashTotal=cash.reduce((sum,a)=>sum+Number(a.balance||0),0), cardTotal=cards.reduce((sum,a)=>sum+Number(a.balance||0),0), limits=cards.reduce((sum,a)=>sum+Number(a.creditLimit||0),0), minimums=cards.reduce((sum,a)=>sum+Number(a.minimumPayment||0),0), utilization=limits?cardTotal/limits*100:0;
+    $('#cashTotal').textContent=money(cashTotal); $('#cashAccountCount').textContent=cash.length+' cash account'+(cash.length===1?'':'s'); $('#cardBalanceTotal').textContent=money(cardTotal); $('#availableCredit').textContent=money(limits-cardTotal); $('#overallUtilization').textContent=utilization.toFixed(1)+'% overall utilization'; $('#monthlyMinimums').textContent=money(minimums); $('#dashboardCashTotal').textContent=money(cashTotal);
+    const due=cards.filter(a=>a.dueDay).sort((a,b)=>a.dueDay-b.dueDay)[0]; $('#nextDueLabel').textContent=due?'Next due: '+due.nickname+' · day '+due.dueDay:'No payments due';
+    $('#creditHealthValue').textContent=utilization<10?'Excellent':utilization<30?'Good':'Needs attention'; $('#creditHealthCopy').textContent=utilization<30?'Utilization is under the recommended 30% threshold.':'Paying down revolving balances would move utilization below 30%.';
+    const filtered=accounts.filter(a=>state.accountFilter==='all'||(state.accountFilter==='cash'?a.type!=='creditCard':a.type==='creditCard'));
+    $('#accountList').innerHTML=filtered.length?filtered.map(a=>{
+      const isCard=a.type==='creditCard', util=isCard&&a.creditLimit?Number(a.balance)/Number(a.creditLimit)*100:0;
+      return '<div class="account-card"><div class="account-logo '+(isCard?'credit':'')+'">'+a.institution.slice(0,2).toUpperCase()+'</div><div><div class="account-title"><strong>'+a.nickname+'</strong><span class="owner-pill">'+a.owner+'</span></div><div class="account-details">'+a.institution+' · '+typeLabel[a.type]+' · •••• '+a.last4+(a.autopay?' · Autopay on':'')+'</div>'+(isCard?'<div class="util-wrap"><div class="util-line"><span>'+util.toFixed(1)+'% utilized</span><span>'+money(Number(a.creditLimit)-Number(a.balance))+' available</span></div><div class="bar"><span class="'+(util<30?'util-safe':'util-warn')+'" style="width:'+Math.min(util,100)+'%"></span></div></div>':'<div class="account-details">'+(a.apy?a.apy.toFixed(2)+'% APY · ':'')+'As of today</div>')+'</div><div class="account-balance"><strong>'+money(a.balance)+'</strong><span class="sub">'+(isCard?'current balance':'available balance')+'</span><div class="account-actions">'+(isCard?'<button data-pay="'+a.id+'">Log payment</button>':'')+'<button data-edit="'+a.id+'">Edit</button></div></div></div>';
+    }).join(''):'<div class="sub" style="padding:24px;text-align:center">No accounts match this filter.</div>';
+    const activities=(state.payments||[]).slice().reverse().slice(0,5);
+    $('#activityList').innerHTML=activities.length?activities.map(p=>'<div class="activity-item"><div class="activity-icon"><i data-lucide="check"></i></div><div><strong>'+p.name+'</strong><div class="sub">'+new Date(p.date).toLocaleDateString('en-US')+'</div></div><div class="activity-amount">'+(p.amount?money(p.amount):'Logged')+'</div></div>').join(''):'<div class="sub" style="padding:14px 0">No payments logged yet.</div>';
+    $$('[data-edit]').forEach(b=>b.addEventListener('click',()=>openAccountModal(b.dataset.edit))); $$('[data-pay]').forEach(b=>b.addEventListener('click',()=>logCardPayment(b.dataset.pay))); lucide.createIcons();
+  }
+  function toggleCardFields(){ const show=$('#accountType').value==='creditCard'; $$('.card-only').forEach(el=>el.style.display=show?'grid':'none'); }
+  function openAccountModal(id){
+    const account=id?state.accounts.find(a=>a.id===id):null; $('#accountForm').reset(); $('#accountId').value=account?.id||''; $('#accountModalTitle').textContent=account?'Edit account':'New account'; $('#deleteAccountBtn').style.display=account?'block':'none';
+    if(account){ $('#accountType').value=account.type; $('#accountOwner').value=account.owner; $('#institutionName').value=account.institution; $('#accountNickname').value=account.nickname; $('#accountLast4').value=account.last4; $('#accountBalance').value=account.balance; $('#creditLimit').value=account.creditLimit||''; $('#accountApr').value=account.apr||''; $('#minimumPayment').value=account.minimumPayment||''; $('#accountDueDay').value=account.dueDay||''; $('#accountAutopay').checked=!!account.autopay; $('#accountNotes').value=account.notes||''; }
+    toggleCardFields(); $('#accountModal').classList.add('open'); setTimeout(()=>$('#institutionName').focus(),50);
+  }
+  function closeAccountModal(){ $('#accountModal').classList.remove('open'); }
+  function logCardPayment(id){
+    const account=state.accounts.find(a=>a.id===id); if(!account)return; const amount=Math.min(Number(account.minimumPayment||account.balance),Number(account.balance)); account.balance=Math.max(0,Number(account.balance)-amount); state.payments.push({name:account.nickname,amount,date:new Date().toISOString()}); dataProvider.save(state); renderAccounts(); showToast(money(amount)+' payment logged for '+account.nickname+'.');
+  }
   function setPage(page){
     state.activePage=page; dataProvider.save(state);
     $$('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
-    const dashboard=$('#dashboard'), placeholder=$('#placeholder');
-    if(page==='Dashboard'){ dashboard.classList.remove('hidden'); placeholder.classList.remove('active'); $('#pageTitle').textContent='Household overview'; requestAnimationFrame(drawCharts); }
-    else { dashboard.classList.add('hidden'); placeholder.classList.add('active'); $('#pageTitle').textContent=page; $('#placeholderTitle').textContent=page+' is queued'; }
+    const dashboard=$('#dashboard'), accounts=$('#accountsPage'), placeholder=$('#placeholder'); dashboard.classList.add('hidden'); accounts.classList.remove('active'); placeholder.classList.remove('active');
+    if(page==='Dashboard'){ dashboard.classList.remove('hidden'); $('#pageTitle').textContent='Household overview'; requestAnimationFrame(drawCharts); }
+    else if(page==='Accounts & Cards'){ accounts.classList.add('active'); $('#pageTitle').textContent='Accounts & cards'; renderAccounts(); }
+    else { placeholder.classList.add('active'); $('#pageTitle').textContent=page; $('#placeholderTitle').textContent=page+' is queued'; }
     $('#sidebar').classList.remove('open');
   }
   function fitCanvas(canvas){ const dpr=window.devicePixelRatio||1, rect=canvas.getBoundingClientRect(); canvas.width=rect.width*dpr; canvas.height=rect.height*dpr; const ctx=canvas.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); return {ctx,w:rect.width,h:rect.height}; }
@@ -160,12 +243,21 @@
 
   $('#todayLabel').textContent=new Intl.DateTimeFormat('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(new Date());
   $$('.nav button').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page)));
-  $$('[data-action]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.action;if(a==='payments')showToast('Payments panel will open in the Accounts batch.');else setPage(a)}));
+  $$('[data-action]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.action;setPage(a==='payments'?'Accounts & Cards':a)}));
   $$('.log-payment').forEach(b=>b.addEventListener('click',()=>{state.payments.push({name:b.dataset.name,date:new Date().toISOString()});dataProvider.save(state);b.textContent='Logged';b.disabled=true;showToast(b.dataset.name+' payment logged in demo storage.')}));
   $$('#trendToggle button').forEach(b=>b.addEventListener('click',()=>{const copy={mom:['↗ 2.4%','vs last month'],qoq:['↗ 7.1%','vs last quarter'],yoy:['↗ 18.5%','vs last year']}[b.dataset.trend];$$('#trendToggle button').forEach(x=>x.classList.toggle('active',x===b));$('#trendValue').textContent=copy[0];$('#trendCopy').textContent=copy[1]}));
   $('#menuBtn').addEventListener('click',()=>$('#sidebar').classList.toggle('open'));
+  $('#newAccountBtn').addEventListener('click',()=>openAccountModal()); $('#accountType').addEventListener('change',toggleCardFields); $$('[data-close-modal]').forEach(b=>b.addEventListener('click',closeAccountModal));
+  $('#accountModal').addEventListener('click',e=>{if(e.target===$('#accountModal'))closeAccountModal()}); document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAccountModal()});
+  $$('#accountFilters button').forEach(b=>b.addEventListener('click',()=>{state.accountFilter=b.dataset.filter; dataProvider.save(state); $$('#accountFilters button').forEach(x=>x.classList.toggle('active',x===b)); renderAccounts()}));
+  $('#accountForm').addEventListener('submit',e=>{
+    e.preventDefault(); const id=$('#accountId').value||'acct-'+Date.now(), existing=state.accounts.find(a=>a.id===id);
+    const account={id,type:$('#accountType').value,owner:$('#accountOwner').value,institution:$('#institutionName').value.trim(),nickname:$('#accountNickname').value.trim(),last4:$('#accountLast4').value,balance:Number($('#accountBalance').value),creditLimit:Number($('#creditLimit').value)||0,apr:Number($('#accountApr').value)||0,minimumPayment:Number($('#minimumPayment').value)||0,dueDay:Number($('#accountDueDay').value)||null,autopay:$('#accountAutopay').checked,notes:$('#accountNotes').value.trim()};
+    if(existing)Object.assign(existing,account);else state.accounts.push(account); dataProvider.save(state); closeAccountModal(); renderAccounts(); showToast(account.nickname+' saved.');
+  });
+  $('#deleteAccountBtn').addEventListener('click',()=>{const id=$('#accountId').value;if(!id)return;state.accounts=state.accounts.filter(a=>a.id!==id);dataProvider.save(state);closeAccountModal();renderAccounts();showToast('Account removed from demo data.')});
   window.addEventListener('resize',()=>{clearTimeout(window.chartTimer);window.chartTimer=setTimeout(drawCharts,100)});
-  setPage(state.activePage); lucide.createIcons(); drawCharts();
+  setPage(state.activePage); renderAccounts(); lucide.createIcons(); drawCharts();
 </script>
 </body>
 </html>
