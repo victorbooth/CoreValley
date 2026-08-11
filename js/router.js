@@ -3,7 +3,7 @@
   const explicitRoutes={
     'Dashboard':'dashboard','Bank Accounts':'bank-accounts','Credit Cards':'credit-cards','Loans':'loans',
     'Subscriptions':'subscriptions','Utilities':'utilities','Charitable Donations':'charitable-donations',
-    'Debt Payoff Simulator':'debt-payoff','Investments':'investments','ESPP':'espp','Physical Assets':'physical-assets',
+    'Debt Payoff Simulator':'debt-payoff','Investments':'investments','ESPP':'espp','Insurance':'insurance','Physical Assets':'physical-assets',
     'Funding Goals':'funding-goals','Calendar':'calendar','Contracts & Warranties':'contracts-warranties',
     'To-Do List':'to-do','Companies':'companies','Rolodex':'rolodex','History':'history','Settings':'settings','Alerts':'alerts'
   };
@@ -11,7 +11,7 @@
   const alwaysRefresh=new Set(['Dashboard','Alerts','History','Calendar','Physical Assets','Rolodex']);
   const pageTargets={
     'Dashboard':'#dashboard','Bank Accounts':'#accountsPage','Credit Cards':'#accountsPage','Loans':'#loansPage',
-    'Debt Payoff Simulator':'#payoffPage','Investments':'#investmentsPage','ESPP':'#esppPage','Physical Assets':'#physicalAssetsPage',
+    'Debt Payoff Simulator':'#payoffPage','Investments':'#investmentsPage','ESPP':'#esppPage','Insurance':'#insurancePage','Physical Assets':'#physicalAssetsPage',
     'Subscriptions':'#subscriptionsPage','Utilities':'#utilitiesPage','Charitable Donations':'#donationsPage',
     'Funding Goals':'#fundingGoalsPage','Calendar':'#calendarPage','Contracts & Warranties':'#documentsPage','To-Do List':'#tasksPage',
     'Companies':'#companiesPage','Rolodex':'#rolodexPage','History':'#historyPage','Settings':'#settingsPage','Alerts':'#alertsPage'
