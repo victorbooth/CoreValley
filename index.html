@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
-  <link rel="stylesheet" href="assets/styles.css?v=20260810-4">
+  <link rel="stylesheet" href="assets/styles.css?v=20260811-routing-final">
 </head>
 <body>
 <div class="app">
@@ -141,22 +141,23 @@
 <div class="modal-backdrop" id="investmentAccountModal"><form class="modal" id="investmentAccountForm"><div class="modal-head"><div><h2 id="investmentAccountModalTitle">New investment account</h2><div class="card-note">Report accounts individually and in household totals.</div></div><button class="close-btn" type="button" data-close-investment-account><i data-lucide="x"></i></button></div><input type="hidden" id="investmentAccountId"><div class="form-grid"><div class="field"><label>Owner</label><select id="investmentAccountOwner"><option>Timothy</option><option>Sara</option><option>Joint</option></select></div><div class="field"><label>Account type</label><select id="investmentAccountType"><option>Brokerage</option><option>401(k)</option><option>Roth IRA</option><option>Traditional IRA</option><option>Crypto</option><option>Other</option></select></div><div class="field"><label>Institution</label><input id="investmentInstitution" required></div><div class="field"><label>Nickname</label><input id="investmentNickname" required></div><div class="field full"><label>Online portal URL</label><input id="investmentPortal" type="url" placeholder="https://"></div></div><div class="modal-foot"><div class="modal-actions"><button class="secondary-btn" type="button" data-close-investment-account>Cancel</button><button class="primary-btn" type="submit">Save account</button></div></div></form></div>
 <div class="modal-backdrop" id="positionModal"><form class="modal" id="positionForm"><div class="modal-head"><div><h2 id="positionModalTitle">New position</h2><div class="card-note">Prices are manual until the Google Sheets connection is added.</div></div><button class="close-btn" type="button" data-close-position><i data-lucide="x"></i></button></div><input type="hidden" id="positionId"><div class="form-grid"><div class="field"><label>Investment account</label><select id="positionAccount" required></select></div><div class="field"><label>Asset class</label><select id="positionAssetClass"><option>US Stock</option><option>International Stock</option><option>ETF</option><option>Bond</option><option>Mutual Fund</option><option>Crypto</option><option>Cash</option><option>Other</option></select></div><div class="field"><label>Symbol</label><input id="positionSymbol" required></div><div class="field"><label>Name</label><input id="positionName" required></div><div class="field"><label>Shares / units</label><input id="positionShares" type="number" min="0" step=".000001" required></div><div class="field"><label>Cost basis per share</label><input id="positionBasis" type="number" min="0" step=".01"></div><div class="field"><label>Current price</label><input id="positionPrice" type="number" min="0" step=".01" required></div><div class="field"><label>Price update date</label><input id="positionPriceDate" type="date" required></div><div class="field"><label>Dividend per share</label><input id="positionDividend" type="number" min="0" step=".0001"></div><div class="field"><label>Dividend frequency</label><select id="positionFrequency"><option value="none">None</option><option value="monthly">Monthly</option><option value="quarterly">Quarterly</option><option value="semiannual">Semiannual</option><option value="annual">Annual</option></select></div><div class="field full"><label>Notes</label><input id="positionNotes"></div></div><div class="modal-foot"><div class="modal-actions"><button class="secondary-btn" type="button" data-close-position>Cancel</button><button class="primary-btn" type="submit">Save position</button></div></div></form></div>
 <div class="modal-backdrop" id="rsuModal"><form class="modal" id="rsuForm"><div class="modal-head"><div><h2>New RSU grant</h2><div class="card-note">Each grant has its own vest dates; trading windows are shared by stock symbol.</div></div><button class="close-btn" type="button" data-close-rsu><i data-lucide="x"></i></button></div><div class="form-grid"><div class="field"><label>Owner</label><select id="rsuOwner"><option>Timothy</option><option>Sara</option></select></div><div class="field"><label>Employer</label><input id="rsuEmployer" required></div><div class="field"><label>Stock symbol</label><input id="rsuSymbol" required></div><div class="field"><label>Grant ID</label><input id="rsuGrantId" required></div><div class="field"><label>Grant date</label><input id="rsuGrantDate" type="date" required></div><div class="field"><label>Current stock price</label><input id="rsuPrice" type="number" min="0" step=".01" required></div><div class="field full"><label>Vesting events</label><div id="vestingEventRows"></div><button class="secondary-btn" id="addVestingEventBtn" type="button">Add vesting date</button></div><div class="field full"><label>Trading windows for this symbol</label><div id="tradingWindowRows"></div><button class="secondary-btn" id="addTradingWindowBtn" type="button">Add trading window</button></div></div><div class="modal-foot"><div class="modal-actions"><button class="secondary-btn" type="button" data-close-rsu>Cancel</button><button class="primary-btn" type="submit">Save grant and symbol windows</button></div></div></form></div>
-  <script src="js/core.js"></script>
-  <script src="js/features/espp-calendar.js"></script>
-  <script src="js/features/investments.js"></script>
-  <script src="js/features/physical-assets.js"></script>
-  <script src="js/features/recurring.js"></script>
-  <script src="js/features/funding-goals.js"></script>
-  <script src="js/features/settings.js"></script>
-  <script src="js/features/record-lifecycle.js"></script>
-  <script src="js/features/household-operations.js"></script>
-  <script src="js/features/companies.js"></script>
-  <script src="js/features/history.js"></script>
-  <script src="js/features/asset-identification.js"></script>
-  <script src="js/features/asset-details.js?v=20260810-3"></script>
-  <script src="js/features/alerts.js"></script>
-  <script src="js/features/rolodex.js?v=20260811-1"></script>
-  <script src="js/features/dashboard-polish.js?v=20260810-1"></script>
-  <script src="js/bootstrap.js"></script>
+  <script src="js/core.js?v=20260811-routing-final"></script>
+  <script src="js/features/espp-calendar.js?v=20260811-routing-final"></script>
+  <script src="js/features/investments.js?v=20260811-routing-final"></script>
+  <script src="js/features/physical-assets.js?v=20260811-routing-final"></script>
+  <script src="js/features/recurring.js?v=20260811-routing-final"></script>
+  <script src="js/features/funding-goals.js?v=20260811-routing-final"></script>
+  <script src="js/features/settings.js?v=20260811-routing-final"></script>
+  <script src="js/features/record-lifecycle.js?v=20260811-routing-final"></script>
+  <script src="js/features/household-operations.js?v=20260811-routing-final"></script>
+  <script src="js/features/companies.js?v=20260811-routing-final"></script>
+  <script src="js/features/history.js?v=20260811-routing-final"></script>
+  <script src="js/features/asset-identification.js?v=20260811-routing-final"></script>
+  <script src="js/features/asset-details.js?v=20260811-routing-final"></script>
+  <script src="js/features/alerts.js?v=20260811-routing-final"></script>
+  <script src="js/features/rolodex.js?v=20260811-routing-final"></script>
+  <script src="js/features/dashboard-polish.js?v=20260811-routing-final"></script>
+  <script src="js/router.js?v=20260811-routing-final"></script>
+  <script src="js/bootstrap.js?v=20260811-routing-final"></script>
 </body>
 </html>
