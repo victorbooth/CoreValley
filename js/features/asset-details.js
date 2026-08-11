@@ -89,6 +89,5 @@
     };
     const searchResults=$('#physicalAssetSearchResults');
     if(searchResults)new MutationObserver(()=>requestAnimationFrame(()=>{$$('#physicalAssetSearchResults .asset-search-card').forEach(card=>{if(card.querySelector('[data-search-open-asset]'))return;const asset=state.assets.find(item=>item.name===card.querySelector('h2')?.textContent);if(!asset)return;const actions=card.querySelector('.inventory-actions');if(actions)actions.innerHTML=`<button class="primary-btn" data-search-open-asset="${asset.id}">${openLabel(asset)}</button>`});$$('[data-search-open-asset]').forEach(button=>button.onclick=()=>{state.physicalAssetDetailId=button.dataset.searchOpenAsset;state.physicalAssetView=detailAsset(button.dataset.searchOpenAsset)?.categoryId||state.physicalAssetView;if($('#physicalAssetSearch'))$('#physicalAssetSearch').value='';dataProvider.save(state);renderPhysicalAssets()});lucide.createIcons()})).observe(searchResults,{childList:true});
-    renderPhysicalAssets();
   }
   installPropertyAndVehicleDetailPages();
