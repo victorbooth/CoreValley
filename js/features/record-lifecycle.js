@@ -10,3 +10,12 @@
     CoreValleyModules.register('Investments',()=>{renderInvestments();renderInvestmentEnhancements();renderRsusV2();refreshRsuInvestmentTotal()});CoreValleyModules.register('ESPP',()=>renderEspp());
   }
   installRecordLifecycleControls();
+  // The lifecycle "Close position" action and the position modal historically
+  // shared data-close-position. Keep modal dismissal isolated from that action.
+  document.addEventListener('click',event=>{
+    const dismissButton=event.target.closest('#positionModal [data-close-position]');
+    if(!dismissButton)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    $('#positionModal').classList.remove('open');
+  },true);
